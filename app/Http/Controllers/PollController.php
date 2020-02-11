@@ -49,6 +49,10 @@ class PollController extends Controller
     public function show(Poll $poll)
     {
         $poll = Poll::findOrFail($poll);
+
+        if (is_null($poll)){
+            return response()->json(null,400);
+        }
         return response()->json($poll,200);
     }
 
