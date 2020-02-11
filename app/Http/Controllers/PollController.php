@@ -36,7 +36,6 @@ class PollController extends Controller
      */
     public function store(Request $request)
     {
-
         $poll = Poll::create($request->all());
         return  response()->json($poll,201);
     }
@@ -73,7 +72,8 @@ class PollController extends Controller
      */
     public function update(Request $request, Poll $poll)
     {
-        //
+        $poll ->update($request->all());
+        return response()->json($poll,200);
     }
 
     /**
