@@ -63,17 +63,12 @@ class PollController extends Controller
      */
     public function show(Poll $poll)
     {
-       // $poll = Poll::find($poll);
+        //side loading
+        $poll->with ('questions')->findOrFail($poll);  // return nested data(relationship)
+        $response['poll']  = $poll;
+        $response['questions']  = $poll->questions;
 
-        if (is_null($poll)){
-            return response()->json(null,400);
-        }
-        // Transformer
-        $poll = Poll::with('questions')->findOrFail($poll);  // reurning nested data(relationship)
-        return  response()->json($poll, 200);
-
-        //$response = new PollResource (Poll::findOrFail($poll),  200);
-//        return  response()->json($response, 200);
+        return  response()->json($response, 200);
 
     }
 
@@ -125,3 +120,15 @@ class PollController extends Controller
         return response()->json($questions,200);
     }
 }
+
+
+
+//if (is_null($poll)){
+//    return response()->json(null,400);
+//}
+//// Transformer
+//$poll = Poll::with('questions')->findOrFail($poll);  // return nested data(relationship)
+//return  response()->json($poll, 200);
+//
+////$response = new PollResource (Poll::findOrFail($poll),  200);
+////        return  response()->json($response, 200);
