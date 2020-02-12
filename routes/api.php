@@ -18,9 +18,10 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 Route::apiresource('polls',          'PollController');
-Route::apiresource('questions',     'QuestionController');
-Route::get('polls/{poll}/questions' ,'PollController@questions');
-Route::get('files/get',                 'FilesController@show');
+Route::apiresource('questions',       'QuestionController');
+Route::get('polls/{poll}/questions',  'PollController@questions');
+Route::get('files/get',                'FilesController@show');
+Route::post('files/create',                'FilesController@create');
 
 Route::any('errors','PollController@errors');
 //Route::resource('polls/{id}','PollController');
