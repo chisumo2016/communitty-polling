@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Poll;
 use Illuminate\Http\Request;
+use App\Http\Resources\Poll as PollResource;
 use Validator;
 
 class PollController extends Controller
@@ -62,11 +63,15 @@ class PollController extends Controller
      */
     public function show(Poll $poll)
     {
-        $poll = Poll::findOrFail($poll);
+       // $poll = Poll::find($poll);
+
         if (is_null($poll)){
             return response()->json(null,400);
         }
-        return response()->json($poll,200);
+        // Transformer
+        $response = new PollResource (Poll::findOrFail($poll),  200);
+        return  response()->json($response, 200);
+       // return response()->json($poll,200);
     }
 
     /**
@@ -94,7 +99,9 @@ class PollController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Remove the specified resource from stor
+     *
+     * age.
      *
      * @param  \App\Poll  $poll
      * @return \Illuminate\Http\Response
