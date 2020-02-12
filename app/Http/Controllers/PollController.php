@@ -108,12 +108,17 @@ class PollController extends Controller
      */
     public function destroy(Poll $poll)
     {
-        $poll->delete();
-        return response()->json(null,200);
+        return response()->json($poll->delete(), null,200);
     }
 
     public  function  errors()
     {
         return response()->json(['message' => "Payment is required"],501);
+    }
+
+    public  function  questions(Request $request , Poll $poll)
+    {
+        $questions = $poll->questions;
+        return response()->json($questions,200);
     }
 }
