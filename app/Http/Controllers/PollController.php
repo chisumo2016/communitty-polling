@@ -69,9 +69,12 @@ class PollController extends Controller
             return response()->json(null,400);
         }
         // Transformer
-        $response = new PollResource (Poll::findOrFail($poll),  200);
-        return  response()->json($response, 200);
-       // return response()->json($poll,200);
+        $poll = Poll::with('questions')->findOrFail($poll);  // reurning nested data(relationship)
+        return  response()->json($poll, 200);
+
+        //$response = new PollResource (Poll::findOrFail($poll),  200);
+//        return  response()->json($response, 200);
+
     }
 
     /**
