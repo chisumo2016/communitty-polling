@@ -14,7 +14,7 @@ class QuestionController extends Controller
      */
     public function index()
     {
-        //
+        return  response()->json(Question::get(),200);
     }
 
     /**
@@ -35,7 +35,7 @@ class QuestionController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        return  response()->json(Question::create($request->all()),2001);
     }
 
     /**
@@ -46,7 +46,7 @@ class QuestionController extends Controller
      */
     public function show(Question $question)
     {
-        //
+        return  response()->json($question,200);
     }
 
     /**
@@ -69,7 +69,7 @@ class QuestionController extends Controller
      */
     public function update(Request $request, Question $question)
     {
-        //
+        return  response()->json($question->update($request->all()), 200);
     }
 
     /**
@@ -80,6 +80,6 @@ class QuestionController extends Controller
      */
     public function destroy(Question $question)
     {
-        //
+        return  response()->json($question->delete(), 200);
     }
 }
