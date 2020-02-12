@@ -16,8 +16,8 @@ class PollController extends Controller
      */
     public function index()
     {
-        $polls = Poll::get()->all();
-        return  response()->json($polls, 200);
+        //$polls = Poll::get()->all();
+        return  response()->json(Poll::paginate(1), 200);
     }
 
     /**
@@ -65,9 +65,8 @@ class PollController extends Controller
     {
         //side loading
         $poll->with ('questions')->findOrFail($poll);  // return nested data(relationship)
-        $response['poll']  = $poll;
+        $response['poll']  =  $poll;
         $response['questions']  = $poll->questions;
-
         return  response()->json($response, 200);
 
     }
